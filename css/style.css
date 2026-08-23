@@ -290,6 +290,13 @@ main {
   display: flex;
   align-items: center;
   gap: 16px;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.play-bar.bar-hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
 }
 
 .play-title {
@@ -349,29 +356,6 @@ main {
   border: 1px solid var(--border);
 }
 
-/* 全屏状态：播放区域占满整个屏幕 */
-.player.fullscreen-active {
-  width: 100vw;
-  height: 100vh;
-  aspect-ratio: unset;
-  border-radius: 0;
-  border: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
-}
-
-/* 手机竖屏时的全屏提示 */
-@media (orientation: portrait) {
-  .player.fullscreen-active {
-    /* 竖屏全屏时，iframe 内容可能被压缩，保持 16:9 居中 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
 .game-frame {
   width: 100%;
   height: 100%;
@@ -405,6 +389,105 @@ main {
   color: var(--accent2);
   padding: 2px 6px;
   border-radius: 6px;
+}
+
+/* 全屏开始遮罩 */
+.fs-start-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 18, 34, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.fs-start-card {
+  text-align: center;
+  padding: 40px;
+}
+
+.fs-start-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.fs-start-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+}
+
+.primary-action {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+  font-weight: 600;
+  padding: 12px 32px;
+  font-size: 16px;
+}
+
+.primary-action:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.ghost {
+  background: transparent !important;
+  border-color: var(--border) !important;
+  color: var(--text-dim) !important;
+  margin-top: 12px;
+}
+
+.ghost:hover {
+  color: var(--text) !important;
+  border-color: var(--text-dim) !important;
+}
+
+/* 退出全屏提示 toast */
+.fs-exit-toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(27, 32, 56, 0.95);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-size: 13px;
+  z-index: 60;
+  animation: toastIn 0.3s ease, toastOut 0.3s ease 2s forwards;
+  backdrop-filter: blur(6px);
+}
+
+@keyframes toastIn  { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+@keyframes toastOut { to   { opacity: 0; transform: translateX(-50%) translateY(20px); } }
+
+/* 全屏时播放器占满视口 */
+.play-main.fullscreen-mode {
+  padding: 0;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: #000;
+}
+
+.play-main.fullscreen-mode .player {
+  border-radius: 0;
+  border: none;
+  aspect-ratio: auto;
+  width: 100%;
+  height: 100%;
 }
 
 /* ---------- 底部 ---------- */
