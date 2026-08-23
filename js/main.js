@@ -202,6 +202,8 @@ document.addEventListener("click", function (e) {
   if (!card) return;
   var id = Number(card.getAttribute("data-id"));
   recordRecent(id); // 记录最近玩过
+  // 保存当前滚动位置，返回时恢复
+  sessionStorage.setItem("scrollPos", String(window.scrollY));
   location.href = "play.html?id=" + id;
 });
 
@@ -211,6 +213,13 @@ function init() {
   renderGrid();
   renderRecent();
   renderFavs();
+
+  // 从游戏页返回时恢复滚动位置
+  var savedPos = sessionStorage.getItem("scrollPos");
+  if (savedPos) {
+    sessionStorage.removeItem("scrollPos");
+    window.scrollTo(0, parseInt(savedPos, 10));
+  }
 }
 
 init();
