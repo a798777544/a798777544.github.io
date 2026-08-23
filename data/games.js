@@ -7,7 +7,7 @@
  *
  *   id          : 游戏唯一编号（数字，别重复）
  *   title       : 游戏名称
- *   category    : 分类（建议用：射击/冒险/竞速/益智/休闲）
+ *   category    : 分类（根据游戏实际玩法填写，例如：射击/冒险/竞速/益智/休闲/塔防/策略/动作）
  *   cover       : 封面图地址（可以填网络图片，或 Website 生成的图片链接）
  *   embedUrl    : Playgama 给你的游戏嵌入链接（iframe 地址）
  *   description : 一句话简介
