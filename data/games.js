@@ -25,11 +25,11 @@ function coverUrl(prompt) {
 var GAME_LIST = [
   {
     id: 1,
-    title: "星际防线",
-    category: "射击",
-    cover: coverUrl("futuristic space shooter game cover art, spaceship battles in deep space, vibrant nebula, cinematic, game thumbnail"),
-    embedUrl: "",  // 这里以后填 Playgama 嵌入链接
-    description: "驾驶星际战机，抵御一波波外星舰队来袭。"
+    title: "Mech Frontline: Last Stand",
+    category: "塔防",
+    cover: coverUrl("mech turret defense game cover, robots and turrets defending base, dramatic battlefield lighting, landscape game thumbnail"),
+    embedUrl: "https://playgama.com/export/game/mech-frontline-last-stand",
+    description: "机甲 + 炮台 + 肉鸽策略的塔防玩法，每局构筑不同防线抵御敌军。"
   },
   {
     id: 2,
