@@ -13,6 +13,13 @@ function getParam(name) {
 function getFavs() { return JSON.parse(localStorage.getItem(FAV_KEY) || "[]"); }
 function saveFavs(list) { localStorage.setItem(FAV_KEY, JSON.stringify(list)); }
 function isFaved(id) { return getFavs().indexOf(id) !== -1; }
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
 
 /* 根据 id 查找游戏 */
 function getGameById(id) {
