@@ -391,68 +391,6 @@ main {
   border-radius: 6px;
 }
 
-/* 全屏开始遮罩 */
-.fs-start-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 18, 34, 0.92);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 50;
-  backdrop-filter: blur(8px);
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-.fs-start-card {
-  text-align: center;
-  padding: 40px;
-}
-
-.fs-start-title {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: var(--text);
-}
-
-.fs-start-desc {
-  font-size: 14px;
-  color: var(--text-dim);
-  margin-bottom: 24px;
-}
-
-.primary-action {
-  background: var(--accent) !important;
-  border-color: var(--accent) !important;
-  color: #fff !important;
-  font-weight: 600;
-  padding: 12px 32px;
-  font-size: 16px;
-}
-
-.primary-action:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-
-.ghost {
-  background: transparent !important;
-  border-color: var(--border) !important;
-  color: var(--text-dim) !important;
-  margin-top: 12px;
-}
-
-.ghost:hover {
-  color: var(--text) !important;
-  border-color: var(--text-dim) !important;
-}
-
 /* 退出全屏提示 toast */
 .fs-exit-toast {
   position: fixed;

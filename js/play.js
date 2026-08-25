@@ -30,7 +30,7 @@ function getGameById(id) {
 }
 
 /* ---------- DOM 引用 ---------- */
-var playerBox, playMain, playBar, startOverlay, exitToast, favBtn, fullBtn, gameData;
+var playerBox, playMain, playBar, exitToast, favBtn, fullBtn, gameData;
 
 /* ---------- 全屏管理 ---------- */
 function enterFullscreen() {
@@ -93,7 +93,6 @@ function init() {
   playerBox = document.getElementById("playerBox");
   playMain  = document.getElementById("playMain");
   playBar   = document.getElementById("playBar");
-  startOverlay = document.getElementById("startOverlay");
   exitToast = document.getElementById("exitToast");
   favBtn    = document.getElementById("favBtn");
   fullBtn   = document.getElementById("fullBtn");
@@ -102,7 +101,6 @@ function init() {
     document.getElementById("gameTitle").textContent = "未找到该游戏";
     document.getElementById("gameTag").textContent = "";
     playerBox.innerHTML = '<div class="empty">游戏不存在或已被移除</div>';
-    startOverlay.classList.add("hidden");
     return;
   }
 
@@ -123,7 +121,6 @@ function init() {
         "<p>去 Playgama 复制嵌入链接，填到 <code>data/games.js</code> 的 <code>" +
         game.title + "</code> 对应的 embedUrl 里即可播放。</p>" +
       "</div>";
-    startOverlay.classList.add("hidden");
   }
 
   // 监听全屏变化
@@ -164,16 +161,25 @@ document.getElementById("fullBtn").addEventListener("click", function () {
   enterFullscreen();
 });
 
-/* 开始全屏遮罩按钮 */
-document.getElementById("startBtn").addEventListener("click", function () {
-  startOverlay.classList.add("hidden");
-  enterFullscreen();
-});
-
-/* 暂不全屏按钮 */
-document.getElementById("skipBtn").addEventListener("click", function () {
-  startOverlay.classList.add("hidden");
-});
+/* 首次任意交互 → 自动进入全屏（浏览器要求全屏必须由用户手势触发） */
+function setupAutoFullscreen() {
+  if (!gameData || !gameData.embedUrl) return;
+  var entered = false;
+  function fire() {
+    if (entered) return;
+    entered = true;
+    enterFullscreen();
+    cleanup();
+  }
+  function cleanup() {
+    document.removeEventListener("pointerdown", fire);
+    document.removeEventListener("touchstart", fire);
+    document.removeEventListener("mousedown", fire);
+  }
+  document.addEventListener("pointerdown", fire);
+  document.addEventListener("touchstart", fire);
+  document.addEventListener("mousedown", fire);
+}
 
 /* 浏览器后退时，退出全屏回到浏览状态 */
 window.addEventListener("popstate", function () {
@@ -182,16 +188,7 @@ window.addEventListener("popstate", function () {
   }
 });
 
-/* 手机端：自动弹出开始全屏遮罩 */
-function showStartOverlayIfMobile() {
-  // 仅手机端显示开始遮罩
-  if (window.innerWidth < 768 && gameData && gameData.embedUrl) {
-    startOverlay.classList.remove("hidden");
-  } else {
-    startOverlay.classList.add("hidden");
-  }
-}
-
-/* 初始化 */
+/* ---------- 初始化 ---------- */
 init();
-showStartOverlayIfMobile();
+/* 手机端 / 桌面端：首次交互自动进入全屏 */
+setupAutoFullscreen();
