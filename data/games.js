@@ -28,7 +28,7 @@ var GAME_LIST = [
     title: "Mech Frontline: Last Stand",
     category: "塔防",
     cover: coverUrl("mech turret defense game cover, robots and turrets defending base, dramatic battlefield lighting, landscape game thumbnail"),
-    embedUrl: "https://playgama.com/export/game/mech-frontline-last-stand",
+    embedUrl: "https://playgama.com/export/game/mech-frontline-last-stand?clid=p_d7a84ff9-3a34-4ba5-b2ee-1a9980a7f9be",
     description: "机甲 + 炮台 + 肉鸽策略的塔防玩法，每局构筑不同防线抵御敌军。"
   },
   {
